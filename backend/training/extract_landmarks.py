@@ -21,6 +21,28 @@ options=vision.HandLandmarkerOptions(base_options=base_options,num_hands=1)
 detector=vision.HandLandmarker.create_from_options(options)
 rows = []
 
+
+def normalize_landmarks(landmarks):
+    """
+    landmarks: iterable of objects with .x,.y,.z (21 landmarks).
+    Returns flattened list of normalized coordinates: for each landmark, (x',y',z')
+    where x',y' are translated relative to wrist(landmark 0) and scaled by max distance.
+    This gives translation/scale invariance.
+    """
+    coords = [(lm.x, lm.y, lm.z) for lm in landmarks]
+    # wrist is landmark 0
+    wx, wy, wz = coords[0]
+    translated = [(x - wx, y - wy, z - wz) for (x, y, z) in coords]
+    import math
+    max_dist = max(math.sqrt(x*x + y*y + z*z) for x, y, z in translated)
+    if max_dist == 0:
+        max_dist = 1.0
+    normalized = [(x / max_dist, y / max_dist, z / max_dist) for x, y, z in translated]
+    flattened = []
+    for x, y, z in normalized:
+        flattened.extend([x, y, z])
+    return flattened
+
 for label in sorted(os.listdir(DATASET_PATH)):
     folder=DATASET_PATH / label
     if not folder.is_dir():
@@ -39,8 +61,7 @@ for label in sorted(os.listdir(DATASET_PATH)):
         if not result.hand_landmarks:
             continue
         landmarks=result.hand_landmarks[0]
-        features=[]
-        for landmark in landmarks:features.extend([landmark.x,landmark.y,landmark.z])
+        features = normalize_landmarks(landmarks)
         features.append(label)
         rows.append(features)
 
