@@ -78,7 +78,7 @@ function WebcamCapture({ onPrediction }) {
         <div className="confidence">
           <div className="confidence-top">
             <span>Confidence</span>
-            <strong>confidence.toFixed(1)%</strong>
+            <strong>{confidence.toFixed(1)}%</strong>
           </div>
           <div className="confidence-bar">
             <div className="confidence-fill" style={{ width: `${confidence}%`,}}></div>
