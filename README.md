@@ -16,7 +16,7 @@
 
 ## 🚀 About
 
-**SignBridge** is an AI-powered web application that uses **real-time webcam input, hand landmark detection, and machine learning** to recognize sign language gestures and convert them into text.
+**SignBridge** is an AI-powered web application that uses **real-time webcam input, hand landmark detection, and machine learning** to recognize **A–Z Indian Sign Language alphabet gestures** and convert them into text.
 
 > 🎯 **Goal:** Make communication more accessible by bridging the gap between sign language and spoken communication.
 
@@ -32,9 +32,13 @@
 * 🔌 FastAPI-powered backend
 * 🧩 Easily extendable with new signs
 
-### Currently Supported
+### 🔤 Currently Supported
 
-`HELLO` · `NAMASTE` · `YES` · `NO`
+`A` · `B` · `C` · `D` · `E` · `F` · `G` · `H` · `I` · `J` · `K` · `L` · `M`
+
+`N` · `O` · `P` · `Q` · `R` · `S` · `T` · `U` · `V` · `W` · `X` · `Y` · `Z`
+
+> 🎯 **Supports all 26 A–Z hand gestures of the Indian Sign Language alphabet.**
 
 ---
 
